@@ -19,6 +19,11 @@
 #include "mysh.h"
 #include "cmd.h"
 
+#define SEG_MSG "Segmentation fault"
+#define SEG_MSG_SIZE 18
+#define FLOAT_MSG "Floating exception"
+#define FLOAT_MSG_SIZE 18
+
 int bin_exec(cmd_t *cmd, char **envp);
 void fork_execbin(cmd_t *cmd, char **envp, char **env_path);
 char *get_execname(char **param);

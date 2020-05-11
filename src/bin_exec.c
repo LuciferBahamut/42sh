@@ -34,10 +34,11 @@ void fork_execbin(cmd_t *cmd, char **envp, char **env_path)
             write(2, strerror(errno), my_strlen(strerror(errno)));
             write(2, "\n", 1);
         }
-    } else {
+    }else {
         write(2, cmd->m_arg[0], my_strlen(cmd->m_arg[0]));
         write(2, ": Command not found.\n", 21);
     }
+    exit(output);
 }
 
 char *get_execname(char **param)
@@ -57,8 +58,12 @@ char *get_execname(char **param)
 void exit_status(int status)
 {
     if (WIFSIGNALED(status)) {
-        write(2, strsignal(WTERMSIG(status)),
-            my_strlen(strsignal(WTERMSIG(status))));
+        if (status == 139)
+            write(2, SEG_MSG, SEG_MSG_SIZE);
+        else if (status == 136)
+            write(2, FLOAT_MSG, FLOAT_MSG_SIZE);
+        else
+            write(2, SEG_MSG, SEG_MSG_SIZE);
         if (WCOREDUMP(status))
             write(2, " (core dumped)", 14);
         write(2, "\n", 1);
