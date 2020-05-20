@@ -21,7 +21,6 @@ void cmd_exec(cmd_t *cmd, char ***envp)
 
     if (!cmd->m_next) {
         mysh(cmd, envp);
-        return;
     } else {
         status = mysh2(cmd, (*envp));
     }

@@ -1,0 +1,119 @@
+#!/usr/bin/env bash
+
+## VAR DEF
+RED='\e[91;1m'
+GREEN='\e[92;1m'
+BLUE='\e[94;1m'
+NC='\e[0m'
+SCORE=0
+TOTAL=0
+
+## OPTION ##
+[[ $1 = "-v" ]] && VERBOSE=1 || VERBOSE=0
+
+## HELP ##
+if [[ $1 = "-h" ]]; then
+    echo -e "# 42SH HOME MOULI #\n"
+    echo "Option:"
+    echo "   -v    Display difference between your output and tcsh output"
+    exit
+fi
+
+## RESULT ##
+function result()
+{
+    echo -e "\n------------------------------ RESULT -------------------------------\n"
+    echo -e "${BLUE}Done${NC}:  ${TOTAL}"
+    echo -e "${GREEN}Success${NC}: ${SCORE}"
+    echo -e "${RED}Failed${NC}: $(($TOTAL-$SCORE))"
+    echo -e "print(f'Score: {$SCORE/$TOTAL*100:.2f}%')"
+}
+
+## VERBOSE VERSION ##
+function display_info()
+{
+    echo -e "--------------------"
+    echo -e "\nGot: "
+    cat $1
+    echo -e "\nExpected: "
+    cat $2
+}
+
+## TEST ##
+function test()
+{
+    TOTAL=$(($TOTAL+1))
+    echo -e "\n\nINPUT: [$1]"
+    echo -e "$1" | ./mysh &> .my
+    echo -e "$1" | tcsh &> .exp
+    diff .my .exp &> /dev/null
+    if [[ $? != 0 ]]; then
+        if [ ${VERBOSE} -eq 1 ]; then
+            display_info .my .exp
+        fi
+        echo -e "Result: ${RED}KO${NC}"
+    else
+        echo -e "Result: ${GREEN}OK${NC}"
+        SCORE=$(($SCORE+1))
+    fi
+    rm .my .exp
+}
+
+#################### TEST ####################
+
+test "ls"
+test "ls -l"
+test "cd"
+test "cat main.c"
+test "cd .."
+test "cd include"
+test "kols"
+test "./mysh"
+test "rien"
+test "           ls        "
+test "           ls      -l"
+test "           ls      mo"
+test "mo ls"
+test "arcd"
+test "           cd"
+test "cd il"
+test "lokiiiiiiils"
+test " | "
+test "hoooooooooooooooooocd ls cat main"
+test "cat inexistant"
+test "cat main.c"
+test "cat ls"
+test "                              rls"
+test "-l ls"
+test "    cd       include"
+test "ls    -     d"
+test "ls -hehe"
+test "        "
+test ""
+test "/bin/tree"
+test "cd niquetarace"
+test "\t"
+test "\t  \t"
+echo "int main() {return 1/0;}" > .test0.c; gcc -w .test0.c
+test "./a.out"
+rm -f .test0.c a.out
+echo "main;" > .test0.c; gcc -w .test0.c
+test "./a.out"
+rm -f .test0.c a.out
+test ";"
+test "ls;ls"
+test "ls ; ls"
+test "ls ; ; ls"
+test "ls; ;ls"
+test ";;;;;;;ls;    ;;      ;;; ls;;;"
+test "ls | cat -e"
+test "ls | grep mysh | wc"
+test "ls | cat -e | wc -l | cat -e | grep "$" | wc -l"
+test "ls > lol; cat lol; rm -f lol"
+test "ls > lol; ls >> lol; cat lol; rm -f lol"
+#echo "ls > .test" | tcsh
+#test "cat -e < .test"
+#rm .test
+#test "cat < ZKNDAKD"
+
+result
