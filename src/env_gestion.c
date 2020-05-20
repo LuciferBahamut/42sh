@@ -19,7 +19,7 @@ void env_stat(cmd_t *cmd, char ***envp)
     }
     if (str_match(cmd->m_exec, "unsetenv")) {
         if (nb_arg == 1) {
-            write(2, "unsetenv: Too few arguments.\n", 29);
+            write(2, UNSETENV_ARGS, my_strlen(UNSETENV_ARGS));
             return;
         }
         for (int it = 1; cmd->m_arg[it]; it++)

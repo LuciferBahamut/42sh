@@ -13,7 +13,7 @@ void dir_change(cmd_t *cmd, char **envp)
     int output = tablen(cmd->m_arg);
 
     if (output > 2) {
-        write(2, "cd: Too many arguments.\n", 24);
+        write(2, CD_ARGS, my_strlen(CD_ARGS));
         return;
     } else if (output == 1 || str_match(cmd->m_arg[1], "~")) {
         cd_logdir(envp);

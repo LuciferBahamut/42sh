@@ -13,7 +13,7 @@ void env(cmd_t *cmd, char **envp)
     if (tablen(cmd->m_arg) == 1)
         print_env(envp);
     else
-        write(2, "env: Too many arguments.\n", 25);
+        write(2, ENV_ARGS, my_strlen(ENV_ARGS));
 }
 
 void my_setenv(cmd_t *cmd, char ***envp)
@@ -21,8 +21,8 @@ void my_setenv(cmd_t *cmd, char ***envp)
     int nb_arg = tablen(cmd->m_arg);
 
     if (!check_arg_setenv(cmd->m_arg[1])) {
-        write(2, "setenv: Variable name must contain \
-alphanumeric characters.\n", 76);
+        write(2, SETENV_ALPHANUM, my_strlen(SETENV_ALPHANUM));
+        write(2, SETENV_ALPHANUM2, my_strlen(SETENV_ALPHANUM2));
         return;
     }
     if (nb_arg == 1) {
@@ -34,7 +34,7 @@ alphanumeric characters.\n", 76);
     else if (nb_arg == 3)
         add_env(envp, cmd->m_arg[1], cmd->m_arg[2]);
     else
-        write(2, "setenv: Too many arguments.\n", 28);
+        write(2, SETENV_ARGS, my_strlen(SETENV_ARGS));
 }
 
 char **get_envpath(char **envp)
