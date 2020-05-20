@@ -39,7 +39,8 @@ bool cmd_validate(char *line, int it)
     if (line[it] == '|' && ((is_opp(line[it + 1]) && line[it + 1] != ';') ||
         (is_opp(line[it - 1]) && line[it - 1] != ';') || line[it + 1] == '\0'))
         return (false);
-    if (line[it] == '>' && ((is_opp(line[it - 1]) && line[it - 1] != '>') || (is_opp(line[it + 1]) && line[it + 1] != '>') || line[it + 1] == '\0'))
+    if (line[it] == '>' && ((is_opp(line[it - 1]) && line[it - 1] != '>') ||
+        (is_opp(line[it + 1]) && line[it + 1] != '>') || line[it + 1] == '\0'))
         return (false);
     return (true);
 }
