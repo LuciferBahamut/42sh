@@ -85,7 +85,7 @@ type_e get_type(char *line)
         start_match("unsetenv", line ) ||
         str_match("env\n", line))
         return (ENV_STATEMENT);
-    if (str_match("exit\n", line) || start_match("exit ", line))
+    if (str_match("exit", line) || start_match("exit ", line))
         return (EXIT);
     return (BIN);
 }
