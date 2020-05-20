@@ -17,11 +17,8 @@ char **my_split(char *str, char *cb)
         for (int it_ = 0; cb[it_]; it_++)
             count += (cb[it_] == str[it]) ? 1 : 0;
     split = malloc(sizeof(char *) * (count + 2));
-    for (int it = 0; it < count + 1; it++) {
-        split[it] = malloc(sizeof(char));
-        split[it][0] = '\0';
-    }
-    split[count + 2] = 0;
+    for (int it = 0; it < count + 2; it++)
+        split[it] = 0;
     for (int it = 0; str[it]; it++) {
         count = 0;
         for (int it_ = 0; cb[it_]; it_++)

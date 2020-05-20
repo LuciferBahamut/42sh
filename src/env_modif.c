@@ -31,7 +31,7 @@ void unset_env(char ***env, char **name)
     addchar(name, '=');
     for (; (*env)[size]; size++) {}
     for (int it = 0; (*env)[it]; it++) {
-        if (start_match((*env)[it], (*name)))
+        if (start_match((*name), (*env)[it]))
             del_line(env, it, size - 1);
     }
 }
