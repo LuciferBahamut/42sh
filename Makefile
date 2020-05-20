@@ -5,37 +5,40 @@
 ## Makefile
 ##
 
-SRC		=	src/parsing/init.c \
-			src/parsing/split.c \
-			src/parsing/tool.c \
-			src/utility/utility1.c \
-			src/utility/utility2.c \
-			src/utility/utility3.c \
-			src/bin_exec.c \
-			src/cmd_exec.c \
-			src/dir_change.c \
-			src/env_gestion.c \
-			src/env_gestion2.c \
-			src/env_modif.c \
-			src/main.c \
+SRC	=	src/parsing/init.c 		\
+		src/parsing/tool.c 		\
+		src/parsing/split.c		\
+		src/utility/utility1.c 		\
+		src/utility/utility2.c 		\
+		src/utility/utility3.c 		\
+		src/bin_exec.c 			\
+		src/cmd_exec.c 			\
+		src/dir_change.c 		\
+		src/env_gestion.c 		\
+		src/env_gestion2.c 		\
+		src/env_modif.c 		\
+		src/main.c 			\
 
-OBJ		=	$(SRC:.c=.o)
+OBJ	=	$(SRC:.c=.o)
 
 NAME	=	mysh
 
 CPPFLAGS=	-I./include
 
-all:		$(NAME)
+all	:	$(NAME)
 
-$(NAME):	$(OBJ)
-			gcc -o $(NAME) $(OBJ)
+$(NAME)	:	$(OBJ)
+		gcc -o $(NAME) $(OBJ)
 
-clean:
-			rm -f $(OBJ)
+debug   :       CFLAGS += -g
+debug   :       re
 
-fclean:		clean
-			rm -f $(NAME)
+clean	:
+		rm -f $(OBJ)
 
-re:			fclean all
+fclean	:	clean
+		rm -f $(NAME)
 
-.PHONY:		all clean fclean re
+re	:	fclean all
+
+.PHONY	:	all clean fclean re

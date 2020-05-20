@@ -19,15 +19,15 @@
 #include "mysh.h"
 #include "cmd.h"
 
-#define SEG_MSG "Segmentation fault"
-#define SEG_MSG_SIZE 18
-#define FLOAT_MSG "Floating exception"
-#define FLOAT_MSG_SIZE 18
-
+/* FUNCTIONS */
 int bin_exec(cmd_t *cmd, char **envp);
 void fork_execbin(cmd_t *cmd, char **envp, char **env_path);
 char *get_execname(char **param);
 void exit_status(int status);
 int bin_exec2(cmd_t *cmd, char **envp);
+
+/* ERROR MESSAGES */
+static const char CMD_NOT_FOUND[] = ": Command not found.\n";
+static const char CORE_DUMP[] = " (core dumped)";
 
 #endif

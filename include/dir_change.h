@@ -15,7 +15,10 @@
 #include "bin_exec.h"
 #include "cmd.h"
 
+/* FUNCTIONS */
 void dir_change(cmd_t *cmd, char **envp);
 void cd_logdir(char **envp);
 
+/* ERROR MESSAGES */
+static const char CD_ARGS[] = "cd: Too many arguments.\n";
 #endif

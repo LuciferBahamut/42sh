@@ -71,7 +71,7 @@ bool env_path_check(char **exec, char **envp)
             return (true);
         }
     }
-    return (true);
+    return (false);
 }
 
 char *strcat_env(char *dest, char *src)
