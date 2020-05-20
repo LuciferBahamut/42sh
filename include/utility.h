@@ -21,5 +21,7 @@ char *my_strdup(char *str);
 void freetab(char **tab);
 char *my_strcat(char *name, char *contain);
 int tablen(char **tab);
+bool is_fopp(char *line, int *it);
+void add_str(char ***tab, char *line);
 
 #endif

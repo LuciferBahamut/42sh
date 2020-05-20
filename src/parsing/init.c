@@ -27,11 +27,13 @@ cmddata_t *parsing_cmd(char *line)
 
 cmd_t *cmd_generate(char *line)
 {
-    char **split = my_split(line, "<>|");
+    char **split = cmd_split(line);
     cmd_t *cmd = 0;
     cmd_t *ncmd = 0;
     int size = 0;
 
+    if (split == 0)
+        return (0);
     for (int it = 0; split[it]; it++) {
         if (my_strlen(split[it]) == 0) {
             size++;

@@ -34,7 +34,7 @@ void fork_execbin(cmd_t *cmd, char **envp, char **env_path)
             write(2, strerror(errno), my_strlen(strerror(errno)));
             write(2, "\n", 1);
         }
-    }else {
+    } else {
         write(2, cmd->m_arg[0], my_strlen(cmd->m_arg[0]));
         write(2, ": Command not found.\n", 21);
     }

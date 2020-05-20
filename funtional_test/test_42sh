@@ -44,8 +44,8 @@ function test()
 {
     TOTAL=$(($TOTAL+1))
     echo -e "\n\nINPUT: [$1]"
-    echo -e "$1" | ./mysh &> .my
-    echo -e "$1" | tcsh &> .exp
+    echo -e "$1" | ./../mysh #&> .my
+    echo -e "$1" | tcsh #&> .exp
     diff .my .exp &> /dev/null
     if [[ $? != 0 ]]; then
         if [ ${VERBOSE} -eq 1 ]; then
@@ -61,39 +61,54 @@ function test()
 
 #################### TEST ####################
 
+# Commande
 test "ls"
-test "ls -l"
-test "cd"
-test "cat main.c"
-test "cd .."
-test "cd include"
-test "kols"
+test "ls /dev"
 test "./mysh"
-test "rien"
-test "           ls        "
-test "           ls      -l"
-test "           ls      mo"
-test "mo ls"
-test "arcd"
-test "           cd"
-test "cd il"
-test "lokiiiiiiils"
-test " | "
-test "hoooooooooooooooooocd ls cat main"
-test "cat inexistant"
-test "cat main.c"
-test "cat ls"
-test "                              rls"
-test "-l ls"
-test "    cd       include"
-test "ls    -     d"
-test "ls -hehe"
-test "        "
+
+# Error handling
 test ""
-test "/bin/tree"
-test "cd niquetarace"
 test "\t"
-test "\t  \t"
+test "\t"
+test "  \t  "
+test "   \t"
+test ";"
+test "<"
+test "<<"
+test ">"
+test ">>"
+test "|"
+test "error"
+
+# CD
+test "cd"
+test "cd -"
+test "cd .."
+
+# Spacing
+test "ls   "
+test "ls   -a"
+test "    ls      -a  /dev   "
+test "ls\t-a  /dev   "
+test "\tls -a /dev\t"
+test "ls -a\t  /dev"
+
+# Separator
+test "cd .. ; ls"
+
+# Pipe
+test "setenv COUCOU ok | env | cat -e"
+test "ls -l | cat -e"
+test "ls -l |> aze; cat aze" # pas de moullit dessus
+rm aze
+
+# Redirection
+test "cat test_42sh > aze; cat aze"
+#test "cat test_42sh >> aze; cat aze"
+
+test "cat < aze"
+#test "cat test_42sh << aze; cat aze"
+
 echo "int main() {return 1/0;}" > .test0.c; gcc -w .test0.c
 test "./a.out"
 rm -f .test0.c a.out
@@ -105,12 +120,8 @@ test "ls;ls"
 test "ls ; ls"
 test "ls ; ; ls"
 test "ls; ;ls"
-test ";;;;;;;ls;    ;;      ;;; ls;;;"
-test "ls | cat -e"
-test "ls | grep mysh | wc"
-test "ls | cat -e | wc -l | cat -e | grep "$" | wc -l"
-test "ls > lol; cat lol; rm -f lol"
-test "ls > lol; ls >> lol; cat lol; rm -f lol"
+
+
 #echo "ls > .test" | tcsh
 #test "cat -e < .test"
 #rm .test

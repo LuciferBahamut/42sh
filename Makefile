@@ -6,6 +6,7 @@
 ##
 
 SRC		=	src/parsing/init.c \
+			src/parsing/split.c \
 			src/parsing/tool.c \
 			src/utility/utility1.c \
 			src/utility/utility2.c \

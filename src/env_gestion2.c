@@ -45,7 +45,7 @@ char **get_envpath(char **envp)
     char **tab = 0;
 
     for (int it = 0; envp[it]; it++)
-        if (start_match(envp[it], "PATH=")) {
+        if (start_match("PATH=", envp[it])) {
             line = envp[it];
             break;
         }

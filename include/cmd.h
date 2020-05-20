@@ -53,5 +53,7 @@ type_e get_type(char *line);
 void cmd_swapopp(cmd_t *cmd);
 void cmd_exec(cmd_t *cmd, char ***envp);
 bool is_opp(char c);
+char **cmd_split(char *line);
+bool cmd_validate(char *line, int it);
 
 #endif

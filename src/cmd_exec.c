@@ -19,6 +19,8 @@ void cmd_exec(cmd_t *cmd, char ***envp)
     int save_stdout = dup(1);
     char buf = 0;
 
+    if (!cmd)
+        return;
     if (!cmd->m_next) {
         mysh(cmd, envp);
     } else {

@@ -11,7 +11,7 @@ bool start_match(char *src, char *cmp)
 {
     if (src == 0)
         return (false);
-    for (int it = 0; cmp[it] != '\0'; it++)
+    for (int it = 0; src[it] != '\0'; it++)
         if (src[it] != cmp[it])
             return (false);
     return (true);

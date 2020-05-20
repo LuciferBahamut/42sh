@@ -79,13 +79,13 @@ bool is_erased(char *line, int it, char *new_line, int diff)
 
 type_e get_type(char *line)
 {
-    if (start_match(line, "cd ") || str_match(line, "cd\n"))
+    if (start_match("cd ", line) || str_match("cd\n", line))
         return (CD);
-    if (start_match(line, "setenv") ||
-        start_match(line, "unsetenv") ||
-        str_match(line, "env\n"))
+    if (start_match("setenv", line) ||
+        start_match("unsetenv", line ) ||
+        str_match("env\n", line))
         return (ENV_STATEMENT);
-    if (str_match(line, "exit\n") || start_match(line, "exit "))
+    if (str_match("exit\n", line) || start_match("exit ", line))
         return (EXIT);
     return (BIN);
 }

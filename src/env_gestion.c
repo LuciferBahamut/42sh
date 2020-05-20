@@ -12,12 +12,12 @@ void env_stat(cmd_t *cmd, char ***envp)
     int nb_arg = tablen(cmd->m_arg);
     int validity = 0;
 
-    if (str_match(cmd->m_exec, "env")) {
+    if (str_match("env", cmd->m_exec)) {
         env(cmd, (*envp));
-    } else if (str_match(cmd->m_exec, "setenv")) {
+    } else if (str_match("setenv", cmd->m_exec)) {
         my_setenv(cmd, envp);
     }
-    if (str_match(cmd->m_exec, "unsetenv")) {
+    if (str_match("unsetenv", cmd->m_exec)) {
         if (nb_arg == 1) {
             write(2, "unsetenv: Too few arguments.\n", 29);
             return;
