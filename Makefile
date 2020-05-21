@@ -17,6 +17,7 @@ SRC	=	src/parsing/init.c 		\
 		src/env_gestion.c 		\
 		src/env_gestion2.c 		\
 		src/env_modif.c 		\
+		src/my_echo.c			\
 		src/main.c 			\
 
 OBJ	=	$(SRC:.c=.o)
