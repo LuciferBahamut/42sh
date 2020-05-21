@@ -21,7 +21,7 @@ SRC	=	src/parsing/init.c 		\
 
 OBJ	=	$(SRC:.c=.o)
 
-NAME	=	mysh
+NAME	=	42sh
 
 CPPFLAGS=	-I./include
 
