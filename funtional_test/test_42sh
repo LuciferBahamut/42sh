@@ -44,8 +44,8 @@ function test()
 {
     TOTAL=$(($TOTAL+1))
     echo -e "\n\nINPUT: [$1]"
-    echo -e "$1" | ./../mysh #&> .my
-    echo -e "$1" | tcsh #&> .exp
+    echo -e "$1" | ./42sh &> .my
+    echo -e "$1" | tcsh &> .exp
     diff .my .exp &> /dev/null
     if [[ $? != 0 ]]; then
         if [ ${VERBOSE} -eq 1 ]; then
@@ -100,7 +100,7 @@ test "cd .. ; ls"
 test "setenv COUCOU ok | env | cat -e"
 test "ls -l | cat -e"
 test "ls -l |> aze; cat aze" # pas de moullit dessus
-rm aze
+rm -f aze
 
 # Redirection
 test "cat test_42sh > aze; cat aze"
@@ -108,6 +108,7 @@ test "cat test_42sh > aze; cat aze"
 
 test "cat < aze"
 #test "cat test_42sh << aze; cat aze"
+rm -f aze
 
 echo "int main() {return 1/0;}" > .test0.c; gcc -w .test0.c
 test "./a.out"
