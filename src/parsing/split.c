@@ -22,8 +22,8 @@ char **cmd_split(char *line)
         if (is_fopp(line, &it)) {
             add_str(&tab, cmd);
             cmd = 0;
-        } else
-            addchar(&cmd, line[it]);
+        }
+        addchar(&cmd, line[it]);
     }
     add_str(&tab, cmd);
     return (tab);
@@ -40,7 +40,12 @@ bool cmd_validate(char *line, int it)
         (is_opp(line[it - 1]) && line[it - 1] != ';') || line[it + 1] == '\0'))
         return (false);
     if (line[it] == '>' && ((is_opp(line[it - 1]) && line[it - 1] != '>') ||
-        (is_opp(line[it + 1]) && line[it + 1] != '>') || line[it + 1] == '\0'))
+        (is_opp(line[it + 1]) && line[it + 1] != '>') || line[it + 1] == '\0' ||
+        (line[it - 1] == line[it + 1] && line[it - 1] == '>')))
+        return (false);
+    if (line[it] == '<' && ((is_opp(line[it - 1]) && line[it - 1] != '<') ||
+        (is_opp(line[it + 1]) && line[it + 1] != '<') || line[it + 1] == '\0' ||
+        (line[it - 1] == line[it + 1] && line[it - 1] == '<')))
         return (false);
     return (true);
 }

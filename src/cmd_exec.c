@@ -24,7 +24,7 @@ void cmd_exec(cmd_t *cmd, char ***envp)
     if (!cmd->m_next) {
         mysh(cmd, envp);
     } else {
-        status = mysh2(cmd, (*envp));
+        status = mysh2(cmd, envp);
     }
     dup2(save_stdin, 0);
     dup2(save_stdout, 1);
@@ -49,36 +49,57 @@ int mysh(cmd_t *cmd, char ***envp)
     }
 }
 
-int mysh2(cmd_t *cmd, char **envp)
+int mysh2(cmd_t *cmd, char ***envp)
+{
+    int status = 0;
+
+    if (cmd->m_opp == e_AppOutput || cmd->m_opp == e_output) {
+        status = red_output(cmd, envp);
+    } else if (cmd->m_opp == e_AppInput || cmd->m_opp == e_input) {
+        //status = red_input(cmd, envp);
+    } else {
+        switch (cmd->m_type) {
+        case BIN:
+            return (bin_exec2(cmd, envp));
+        case CD:
+            dir_change(cmd, (*envp));
+            return (0);
+        case ENV_STATEMENT:
+            env_stat(cmd, envp); // env write ?
+            return (0);
+        case EXIT:
+            write(1, "exit\n", 5);
+            exit(0); // change for a value
+        }
+    }
+    return (status);
+}
+
+int red_output(cmd_t *cmd, char ***envp)
 {
     int save_stdout;
     int status = 0;
     int file = 0;
 
-    if (cmd->m_opp == e_AppOutput || cmd->m_opp == e_output) {
-        save_stdout = dup(1);
-        if (cmd->m_opp == e_AppOutput)
-            file = open(cmd->m_exec, O_APPEND | O_WRONLY | O_CREAT);
-        else
-            file = open(cmd->m_exec, O_WRONLY | O_CREAT);
-        if (file == -1) {
-            write(2, cmd->m_exec, my_strlen(cmd->m_exec));
-            write(2, ": ", 2);
-            write(2, strerror(errno), my_strlen(strerror(errno)));
-            write(2, "\n", 1);
-            return (84);
-        }
-        dup2(file, 1);
-        status = mysh2(cmd->m_next, envp);
-        close(file);
-        dup2(save_stdout, 1);
-    } else {
-        status = bin_exec2(cmd, envp);
+    save_stdout = dup(1);
+    if (cmd->m_opp == e_AppOutput)
+        file = open(cmd->m_exec, O_APPEND | O_WRONLY | O_CREAT); // ajouter les droits
+    else
+        file = open(cmd->m_exec, O_WRONLY | O_CREAT); // ajouter les droits
+    if (file == -1) {
+        write(2, cmd->m_exec, my_strlen(cmd->m_exec));
+        write(2, ": ", 2);
+        write(2, strerror(errno), my_strlen(strerror(errno)));
+        write(2, "\n", 1);
+        return (84);
     }
-    return (status);
+    dup2(file, 1);
+    status = mysh2(cmd->m_next, envp);
+    close(file);
+    dup2(save_stdout, 1);
 }
 
-int bin_exec2(cmd_t *cmd, char **envp)
+int bin_exec2(cmd_t *cmd, char ***envp)
 {
     int status = 0;
     int pipefd[2];
@@ -87,7 +108,7 @@ int bin_exec2(cmd_t *cmd, char **envp)
     if (fork() == 0) {
         close(pipefd[1]);
         dup2(pipefd[0], 0);
-        fork_execbin(cmd, envp, get_envpath(envp));
+        fork_execbin(cmd, (*envp), get_envpath((*envp)));
         close(pipefd[0]);
         exit(0);
     } else {

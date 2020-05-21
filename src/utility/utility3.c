@@ -19,12 +19,10 @@ bool is_fopp(char *line, int *it)
     if (line[(*it)] == '<') {
         if (line[(*it)] == '<')
             (*it)++;
-        (*it)++;
         return (true);
     } else if (line[(*it)] == '>') {
         if (line[(*it)] == '>')
             (*it)++;
-        (*it)++;
         return (true);
     }
     if (line[(*it)] == '|' || line[(*it)] == '&' ||

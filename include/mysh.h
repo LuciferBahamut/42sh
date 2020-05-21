@@ -22,6 +22,7 @@ void erase_space(char **line);
 char **get_envpath(char **envp);
 char **get_envpath2(char *line);
 int mysh(cmd_t *cmd, char ***envp);
-int mysh2(cmd_t *cmd, char **envp);
+int mysh2(cmd_t *cmd, char ***envp);
+int redirection(cmd_t *cmd, char ***envp);
 
 #endif
