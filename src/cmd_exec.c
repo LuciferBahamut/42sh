@@ -11,6 +11,7 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include "mysh.h"
+#include "echo.h"
 
 void cmd_exec(cmd_t *cmd, char ***envp)
 {
@@ -35,17 +36,20 @@ void cmd_exec(cmd_t *cmd, char ***envp)
 int mysh(cmd_t *cmd, char ***envp)
 {
     switch (cmd->m_type) {
-        case BIN:
-            return (bin_exec(cmd, (*envp)));
-        case CD:
-            dir_change(cmd, (*envp));
-            return (0);
-        case ENV_STATEMENT:
-            env_stat(cmd, envp);
-            return (0);
-        case EXIT:
-            write(1, "exit\n", 5);
-            exit(0);
+    case BIN:
+        return (bin_exec(cmd, (*envp)));
+    case CD:
+        dir_change(cmd, (*envp));
+        return (0);
+    case ENV_STATEMENT:
+        env_stat(cmd, envp);
+        return (0);
+    case ECHO:
+        my_echo(cmd);
+        return (0);
+    case EXIT:
+        write(1, "exit\n", 5);
+        exit(0);
     }
 }
 

@@ -77,6 +77,13 @@ bool is_erased(char *line, int it, char *new_line, int diff)
     return (false);
 }
 
+static type_e get_type_bis(char *line)
+{
+    if (start_match("echo ", line))
+        return (ECHO);
+    return (BIN);
+}
+
 type_e get_type(char *line)
 {
     if (start_match("cd ", line) || str_match("cd\n", line))
@@ -87,5 +94,5 @@ type_e get_type(char *line)
         return (ENV_STATEMENT);
     if (str_match("exit", line) || start_match("exit ", line))
         return (EXIT);
-    return (BIN);
+    return (get_type_bis(line));
 }

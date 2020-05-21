@@ -14,6 +14,7 @@ typedef enum
     CD,
     ENV_STATEMENT,
     EXIT,
+    ECHO,
     ERROR
 } type_e;
 
