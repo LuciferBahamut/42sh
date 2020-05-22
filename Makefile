@@ -14,6 +14,8 @@ SRC	=	src/parsing/init.c 		\
 		src/bin_exec.c 			\
 		src/cmd_exec.c 			\
 		src/dir_change.c 		\
+		src/dir_change_2.c		\
+		src/dir_change_3.c		\
 		src/env_gestion.c 		\
 		src/env_gestion2.c 		\
 		src/env_modif.c 		\

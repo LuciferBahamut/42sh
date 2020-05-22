@@ -86,7 +86,8 @@ static type_e get_type_bis(char *line)
 
 type_e get_type(char *line)
 {
-    if (start_match("cd ", line) || str_match("cd\n", line))
+    if (start_match("cd ", line) || str_match("cd\n", line)
+        || str_match("cd\0", line))
         return (CD);
     if (start_match("setenv", line) ||
         start_match("unsetenv", line ) ||

@@ -39,7 +39,7 @@ int mysh(cmd_t *cmd, char ***envp)
     case BIN:
         return (bin_exec(cmd, (*envp)));
     case CD:
-        dir_change(cmd, (*envp));
+        dir_change(cmd, envp);
         return (0);
     case ENV_STATEMENT:
         env_stat(cmd, envp);
@@ -66,7 +66,7 @@ int mysh2(cmd_t *cmd, char ***envp)
         case BIN:
             return (bin_exec2(cmd, envp));
         case CD:
-            dir_change(cmd, (*envp));
+            dir_change(cmd, envp);
             return (0);
         case ENV_STATEMENT:
             env_stat(cmd, envp); // env write ?
