@@ -12,6 +12,7 @@ SRC	=	src/parsing/init.c 		\
 		src/utility/utility2.c 		\
 		src/utility/utility3.c 		\
 		src/bin_exec.c 			\
+		src/bin_exec_2.c		\
 		src/cmd_exec.c 			\
 		src/dir_change.c 		\
 		src/dir_change_2.c		\

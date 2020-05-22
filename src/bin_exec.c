@@ -54,7 +54,7 @@ char *get_execname(char **param)
     return (ptr);
 }
 
-void exit_status(int status)
+/*void exit_status(int status)
 {
     if (WIFSIGNALED(status)) {
         write(2, strsignal(WTERMSIG(status)),
@@ -63,4 +63,4 @@ void exit_status(int status)
             write(2, CORE_DUMP, my_strlen(CORE_DUMP));
         write(2, "\n", 1);
     }
-}
+}*/

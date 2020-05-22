@@ -18,6 +18,7 @@
 #include "environnement.h"
 #include "mysh.h"
 #include "cmd.h"
+#include <signal.h>
 
 /* FUNCTIONS */
 int bin_exec(cmd_t *cmd, char **envp);
