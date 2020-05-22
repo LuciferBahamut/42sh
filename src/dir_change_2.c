@@ -21,17 +21,12 @@ static int cd_setenv(char **envp[], char *str, char *str2)
 {
     int i = 0;
     int j = 0;
-//    int k = 0;
     int len = cd_setenv_lenght(str, str2);
     int pos = -5;
     char **rsl = cd_copy(*envp, 2, &pos);
 
-//    for (; envp[0][k] != NULL; k++)
-//        free(envp[0][k]);
-//    free(envp[0][k]);
     if (rsl == NULL || pos == -5 || len == -84)
         return 84;
-//        return error_disp(NULL, 2);
     rsl[pos] = (char *)malloc((len + 2) * sizeof(char));
     rsl[pos][(len + 1)] = '\0';
     for (; str[i] != '\0'; rsl[pos][i] = str[i], i++);
@@ -59,23 +54,17 @@ static int pre_cd_setenv(char **envp[], char *str, char *str2, int where)
     envp[0][where] = tmp;
 }
 
-int cd_go_back(char **envp[]/*, int pos*/)
+int cd_go_back(char **envp[])
 {
     int i = 0;
     int where = -1;
     char *tmp = NULL;
 
-//    if (pos == -84)
-//        return 84;
-//    else {
-        for (; envp[0][i] != NULL; i++)
-            where = (cd_mysrcmp(envp[0][i], "OLDPWD=\0") == 0) ? i : where;
-        if (where != -1)
-            return change_dir((envp[0][where] + 7), envp);
-//        else
-//            return error_disp(NULL, 4);
-        return -1;
-//    }
+    for (; envp[0][i] != NULL; i++)
+        where = (cd_mysrcmp(envp[0][i], "OLDPWD=\0") == 0) ? i : where;
+    if (where != -1)
+        return change_dir((envp[0][where] + 7), envp);
+    return -1;
 }
 
 int change_dir(char *path, char **envp[])
@@ -88,10 +77,6 @@ int change_dir(char *path, char **envp[])
     for (; envp[0][i] != NULL; i++)
         where = (cd_mysrcmp(envp[0][i], "OLDPWD=\0") == 0) ? i : where;
     ok = pre_cd_setenv(envp, "OLDPWD\0", getcwd(NULL, 0), where);
-//    printf("start\n");
-//    for (int j = 0; envp[0][j] != NULL; j++)
-//        printf("%s\n", envp[0][j]);
-//    printf("end\n");
     if (ok == 84)
         return 84;
     else

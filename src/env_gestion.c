@@ -54,7 +54,8 @@ bool env_path_check(char **exec, char **envp)
 {
     char *path = 0;
 
-    if (start_match((*exec), "./")) {
+    //if (start_match((*exec), "./")) {
+    if (start_match("./\0", (*exec))) {
         if (access((*exec), F_OK) != -1)
             return (true);
         return (false);

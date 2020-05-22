@@ -5,7 +5,6 @@
 ** dir_change
 */
 
-
 #include "dir_change.h"
 
 int cd_mysrcmp(char const *s1, char const *s2)
@@ -74,7 +73,6 @@ void dir_change(cmd_t *cmd, char ***envp)
         return;
     }
     output = change_dir(cmd->m_arg[1], envp);
-    //output = chdir(cmd->m_arg[1]); // to change
     if (output == -1) {
         write(2, cmd->m_arg[1], my_strlen(cmd->m_arg[1]));
         write(2, ": ", 2);
@@ -88,11 +86,9 @@ void cd_logdir(char *path, char ***envp)
     int pos = 0;
 
     change_dir(path, envp);
-    //chdir("/home"); // to change
-    for (; envp[0][pos]; pos++)
-        if (start_match(envp[0][pos], "LOGNAME="))
-            break;
-    if (envp[0][pos] != NULL)
-        change_dir((envp[0][pos] + 8), envp);
-//        chdir(envp[pos] + 8); // to change 
+    for (; envp[0][pos]; pos++) // useless ?
+        if (start_match(envp[0][pos], "LOGNAME=")) // useless ?
+            break; // useless ?
+    if (envp[0][pos] != NULL) // useless ?
+        change_dir((envp[0][pos] + 8), envp); // useless ?
 }
