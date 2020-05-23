@@ -86,9 +86,9 @@ void cd_logdir(char *path, char ***envp)
     int pos = 0;
 
     change_dir(path, envp);
-    for (; envp[0][pos]; pos++) // useless ?
-        if (start_match(envp[0][pos], "LOGNAME=")) // useless ?
-            break; // useless ?
-    if (envp[0][pos] != NULL) // useless ?
-        change_dir((envp[0][pos] + 8), envp); // useless ?
+    for (; envp[0][pos]; pos++)
+        if (start_match(envp[0][pos], "LOGNAME="))
+            break;
+    if (envp[0][pos] != NULL)
+        change_dir((envp[0][pos] + 8), envp);
 }
