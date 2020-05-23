@@ -8,9 +8,7 @@
 #include "environnement.h"
 #include <sys/stat.h>
 
-// bin = ../a.out or a.out or ./a.out,      a.out can be anything (yep even a directorie) which is not found thank to the PATH.
-
-int exe_checker(char *pathname) // will check if the thing pointed by pathname can be executed by execve. if it can it return 0 else return something > 0
+int exe_checker(char *pathname)
 {
     int test = 0;
 
@@ -25,7 +23,7 @@ int exe_checker(char *pathname) // will check if the thing pointed by pathname c
     return test;
 }
 
-char *pathmaker(char *start, char *end) // take in start the beging of an ABSOLUTE path and in end it's end... no need to understand more this function is complexe.
+char *pathmaker(char *start, char *end)
 {
     int len1 = 0;
     int len2 = 0;
@@ -49,7 +47,7 @@ char *pathmaker(char *start, char *end) // take in start the beging of an ABSOLU
     return rsl;
 }
 
-int isbar(char *bin, char *check) // return the position of a "/" or return -1
+int isbar(char *bin, char *check)
 {
     int i = 0;
     int pos = -1;
@@ -64,7 +62,7 @@ int isbar(char *bin, char *check) // return the position of a "/" or return -1
     return pos;
 }
 
-char *ppath(char *bin) // only use for bin that can't be found with the PATH. basically return the path to the bin if it can be execve or return NULL if it can't.
+char *ppath(char *bin)
 {
     struct stat sb;
     char *path = NULL;
@@ -87,10 +85,3 @@ char *ppath(char *bin) // only use for bin that can't be found with the PATH. ba
     else
         return NULL;
 }
-
-// exemple of how ppath can be use.
-
-//        else if (ppath(cmds[i].bin) != NULL)
-//            cmds[i].path = ppath(cmds[i].bin);
-//        else
-//            return not_found(cmds[i]);
