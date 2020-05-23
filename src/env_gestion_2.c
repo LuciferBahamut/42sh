@@ -20,7 +20,7 @@ int exe_checker(char *pathname)
         if (access(pathname, X_OK) != 0)
             test += 1;
     }
-    return test;
+    return (test);
 }
 
 char *pathmaker(char *start, char *end)
@@ -44,7 +44,7 @@ char *pathmaker(char *start, char *end)
     for (i = 0; i < len1; rsl[i] = start[i], i++);
     rsl[i++] = '/';
     for (j += (3 * nb[1]); end[j] != '\0'; rsl[i] = end[j], i++, j++);
-    return rsl;
+    return (rsl);
 }
 
 int isbar(char *bin, char *check)
@@ -53,13 +53,13 @@ int isbar(char *bin, char *check)
     int pos = -1;
 
     if (check != NULL)
-        return pos;
+        return (pos);
     else {
         for (; bin[i] != '\0'; i++)
             if (bin[i] == '/')
                 pos = i;
     }
-    return pos;
+    return (pos);
 }
 
 char *ppath(char *bin)
@@ -70,18 +70,19 @@ char *ppath(char *bin)
     int pos = -1;
 
     if (exe_checker(pathmaker(getcwd(NULL, 0), bin)) == 0)
-        return pathmaker(getcwd(NULL, 0), bin);
+        return (pathmaker(getcwd(NULL, 0), bin));
     if (bin[0] == '.' && bin[1] == '/')
         if (exe_checker(pathmaker(getcwd(NULL, 0), (bin + 2))) == 0)
             path = pathmaker(getcwd(NULL, 0), (bin + 2));
     if (bin[0] == '/' && exe_checker(bin) == 0) {
         stat(bin, &sb);
         if (S_ISDIR(sb.st_mode) == 0)
-            path = bin;}
+            path = bin;
+    }
     if (isbar(bin, path) != -1)
         path = pathmaker(getcwd(NULL, 0), bin);
     if (exe_checker(path) == 0)
-        return path;
+        return (path);
     else
-        return NULL;
+        return (NULL);
 }

@@ -37,7 +37,7 @@ char *cd2(char *folder, char *envp[])
     rsl[i++] = '/';
     pos = (folder[1] == '\0') ? 1 : 2;
     for (; folder[pos] != '\0'; rsl[i] = folder[pos++], i++);
-    return rsl;
+    return (rsl);
 }
 
 char *cd3(char *envp[])
@@ -49,9 +49,9 @@ char *cd3(char *envp[])
     if (cd_mysrcmp(envp[pos], "HOME=\0") == 0)
         tmp = (envp[pos] + 5);
     if (tmp != NULL)
-        return tmp;
+        return (tmp);
     else
-        return "/home\0";
+        return ("/home\0");
 }
 
 void dir_change(cmd_t *cmd, char ***envp)
