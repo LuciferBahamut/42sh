@@ -53,14 +53,3 @@ char *get_execname(char **param)
     (*param) = str;
     return (ptr);
 }
-
-/*void exit_status(int status)
-{
-    if (WIFSIGNALED(status)) {
-        write(2, strsignal(WTERMSIG(status)),
-            my_strlen(strsignal(WTERMSIG(status))));
-        if (WCOREDUMP(status))
-            write(2, CORE_DUMP, my_strlen(CORE_DUMP));
-        write(2, "\n", 1);
-    }
-}*/
