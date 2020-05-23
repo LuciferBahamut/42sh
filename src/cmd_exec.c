@@ -69,11 +69,11 @@ int mysh2(cmd_t *cmd, char ***envp)
             dir_change(cmd, envp);
             return (0);
         case ENV_STATEMENT:
-            env_stat(cmd, envp); // env write ?
+            env_stat(cmd, envp);
             return (0);
         case EXIT:
             write(1, "exit\n", 5);
-            exit(0); // change for a value
+            exit(0);
         }
     }
     return (status);
@@ -87,9 +87,9 @@ int red_output(cmd_t *cmd, char ***envp)
 
     save_stdout = dup(1);
     if (cmd->m_opp == e_AppOutput)
-        file = open(cmd->m_exec, O_APPEND | O_WRONLY | O_CREAT); // ajouter les droits
+        file = open(cmd->m_exec, O_APPEND | O_WRONLY | O_CREAT);
     else
-        file = open(cmd->m_exec, O_WRONLY | O_CREAT); // ajouter les droits
+        file = open(cmd->m_exec, O_WRONLY | O_CREAT);
     if (file == -1) {
         write(2, cmd->m_exec, my_strlen(cmd->m_exec));
         write(2, ": ", 2);
