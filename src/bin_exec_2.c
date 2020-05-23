@@ -22,29 +22,48 @@ static int my_puterror(char *str, int opt)
         my_charerror('\n');
     else if (opt == 1)
         my_charerror(' ');
-    return 0;
+    return (0);
+}
+
+static void exit_status_bis(int status)
+{
+    switch (WTERMSIG(status)) {
+    case SIGKILL :
+        my_puterror("Killed", 0);
+        break;
+    case SIGQUIT :
+        my_puterror("Quit", 0);
+        break;
+    case SIGSTOP :
+        my_puterror("Stopped", 0);
+        break;
+    case SIGILL :
+        my_puterror("illegal hardware instruction", 0);
+        break;
+    }
 }
 
 void exit_status(int status)
 {
-    if (WTERMSIG(status) == SIGABRT)
+    switch (WTERMSIG(status)) {
+    case SIGABRT :
         my_puterror("Abort", 0);
-    if ((WTERMSIG(status) == SIGSEGV) && ((WCOREDUMP(status))))
-        my_puterror("Segmentation fault (core dumped)", 0);
-    else if ((WTERMSIG(status) == SIGSEGV))
-        my_puterror("Segmentation fault", 0);
-    if (WTERMSIG(status) == SIGFPE)
-        my_puterror("Floating exception", 0);
-    else if ((WTERMSIG(status) == SIGFPE) && ((WCOREDUMP(status))))
-        my_puterror("Floating exception (core dumped)", 0);
-    if (WTERMSIG(status) == SIGTERM)
+        break;
+    case SIGSEGV :
+        if (WCOREDUMP(status))
+            my_puterror("Segmentation fault (core dumped)", 0);
+        else
+            my_puterror("Segmentation fault", 0);
+        break;
+    case SIGFPE :
+        if (WCOREDUMP(status))
+            my_puterror("Floating exception (core dumped)", 0);
+        else
+            my_puterror("Floating exception", 0);
+        break;
+    case SIGTERM :
         my_puterror("Terminated", 0);
-    if (WTERMSIG(status) == SIGKILL)
-        my_puterror("Killed", 0);
-    if (WTERMSIG(status) == SIGQUIT)
-        my_puterror("Quit", 0);
-    if (WTERMSIG(status) == SIGSTOP)
-        my_puterror("Stopped", 0);
-    if (WTERMSIG(status) == SIGILL)
-        my_puterror("illegal hardware instruction", 0);
+        break;
+    }
+    exit_status_bis(status);
 }
