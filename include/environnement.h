@@ -13,6 +13,7 @@
 #include "utility.h"
 #include "mysh.h"
 #include "cmd.h"
+#include <sys/stat.h>
 
 /* FUNCTIONS */
 void env_stat(cmd_t *cmd, char ***envp);

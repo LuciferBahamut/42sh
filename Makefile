@@ -20,6 +20,7 @@ SRC	=	src/parsing/init.c 		\
 		src/dir_change_3.c		\
 		src/env_gestion.c 		\
 		src/env_gestion2.c 		\
+		src/env_gestion_2.c		\
 		src/env_modif.c 		\
 		src/my_echo.c			\
 		src/main.c 			\

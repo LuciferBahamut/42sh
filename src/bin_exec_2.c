@@ -63,7 +63,6 @@ void exit_status(int status)
         break;
     case SIGTERM :
         my_puterror("Terminated", 0);
-        break;
-    }
+        break;}
     exit_status_bis(status);
 }

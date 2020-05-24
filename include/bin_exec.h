@@ -26,6 +26,8 @@ void fork_execbin(cmd_t *cmd, char **envp, char **env_path);
 char *get_execname(char **param);
 void exit_status(int status);
 int bin_exec2(cmd_t *cmd, char ***envp);
+char *ppath(char *bin);
+void pre_fork_execbin(cmd_t *cmd, char **envp, char **env_path);
 
 /* ERROR MESSAGES */
 static const char CMD_NOT_FOUND[] = ": Command not found.\n";
