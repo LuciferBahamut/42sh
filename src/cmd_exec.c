@@ -59,9 +59,8 @@ int mysh2(cmd_t *cmd, char ***envp)
 
     if (cmd->m_opp == e_AppOutput || cmd->m_opp == e_output) {
         status = red_output(cmd, envp);
-    } else if (cmd->m_opp == e_AppInput || cmd->m_opp == e_input) {
-        //status = red_input(cmd, envp);
-    } else {
+    } else if (cmd->m_opp == e_AppInput || cmd->m_opp == e_input);
+    else {
         switch (cmd->m_type) {
         case BIN:
             return (bin_exec2(cmd, envp));

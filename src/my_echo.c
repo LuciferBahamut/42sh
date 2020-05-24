@@ -7,12 +7,30 @@
 
 #include "mysh.h"
 
+static void my_putchar(char c)
+{
+    write(1, &c, 1);
+}
+
+static int myputstr(char *str, int opt)
+{
+    int i;
+
+    for (i = 0; str[i] != '\0'; i++)
+        my_putchar(str[i]);
+    if (opt == 0)
+        my_putchar('\n');
+    else if (opt == 1)
+        my_putchar(' ');
+    return (0);
+}
+
 void my_echo(cmd_t *cmd)
 {
     for (int i = 1; cmd->m_arg[i] != NULL; i++) {
         if (cmd->m_arg[i + 1] != NULL)
-            printf("%s ", cmd->m_arg[i]);
+            myputstr(cmd->m_arg[i], 1);
         else
-            printf("%s\n", cmd->m_arg[i]);
+            myputstr(cmd->m_arg[i], 0);
     }
 }
