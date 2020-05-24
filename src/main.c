@@ -14,7 +14,8 @@ int main(int argc, char **argv, char **envp)
     cmddata_t *data = 0;
 
     while (1) {
-        write(1, "$> ", 3);
+        if (!(argc == 2 && argv[1][0] == '-' && argv[1][1] == 't'))
+            write(1, "$> ", 3);
         data = ask_input();
         for (cmddata_t *ptr_d = data; ptr_d; ptr_d = ptr_d->m_next)
             cmd_exec(ptr_d->m_cmd, &envp);
