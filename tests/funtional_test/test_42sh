@@ -44,7 +44,7 @@ function test()
 {
     TOTAL=$(($TOTAL+1))
     echo -e "\n\nINPUT: [$1]"
-    echo -e "$1" | ./42sh &> .my
+    echo -e "$1" | ./42sh | sed -e "s/^$> //" -e "s/$>//" | sed -z '$ s/\n$//' &> .my
     echo -e "$1" | tcsh &> .exp
     diff .my .exp &> /dev/null
     if [[ $? != 0 ]]; then
