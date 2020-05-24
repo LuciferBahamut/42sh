@@ -27,7 +27,8 @@ char **my_split(char *str, char *cb)
             pos++;
             continue;
         }
-        addchar(&split[pos], str[it]);}
+        addchar(&split[pos], str[it]);
+    }
     return (split);
 }
 

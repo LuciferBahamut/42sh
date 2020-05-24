@@ -73,12 +73,8 @@ void dir_change(cmd_t *cmd, char ***envp)
         return;
     }
     output = change_dir(cmd->m_arg[1], envp);
-    if (output == -1) {
-        write(2, cmd->m_arg[1], my_strlen(cmd->m_arg[1]));
-        write(2, ": ", 2);
-        write(2, strerror(errno), my_strlen(strerror(errno)));
-        write(2, ".\n", 2);
-    }
+    if (output == -1)
+        write_error(cmd);
 }
 
 void cd_logdir(char *path, char ***envp)
