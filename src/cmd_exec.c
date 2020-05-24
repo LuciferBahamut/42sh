@@ -112,7 +112,7 @@ int bin_exec2(cmd_t *cmd, char ***envp)
     if (fork() == 0) {
         close(pipefd[1]);
         dup2(pipefd[0], 0);
-        fork_execbin(cmd, (*envp), get_envpath((*envp)));
+        pre_fork_execbin(cmd, (*envp), get_envpath((*envp)));
         close(pipefd[0]);
         exit(0);
     } else {
