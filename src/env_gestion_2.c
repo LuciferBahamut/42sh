@@ -76,7 +76,8 @@ char *ppath(char *bin)
     if (bin[0] == '/' && exe_checker(bin) == 0) {
         stat(bin, &sb);
         if (S_ISDIR(sb.st_mode) == 0)
-            path = bin;}
+            path = bin;
+    }
     if (isbar(bin, path) != -1)
         path = pathmaker(getcwd(NULL, 0), bin);
     if (exe_checker(path) == 0)
