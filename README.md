@@ -7,7 +7,7 @@ Based on all Minishell2
 
 |             Category             | Percentage | Number of tests | Crash ? |
 |:--------------------------------:|:----------:|:---------------:|:-------:|
-|            basic tests           |    100 %   |       4 /4      |    x    |
+|            basic tests           |    100 %   |      4 / 4      |    x    |
 |           path handling          |    60 %    |      3 / 5      | **YES** |
 |        setenv and unsetenv       |    100 %   |      2 / 2      |    x    |
 |            builtin cd            |   66,7 %   |      2 / 3      |    x    |
@@ -18,7 +18,7 @@ Based on all Minishell2
 |           advanced pipe          |     0 %    |      0 / 6      |    x    |
 |           redirections           |   33,3 %   |      1 / 3      |    x    |
 |      advanced manipulations      |     0 %    |      0 / 3      |    x    |
-|            **Results**           | **47,7 %** |        /        | **YES** |
+|            **Results**           | **47,7 %** |      21  / 44       | **YES** |
 
 |       Category       | Number of tests |                                                      Comment ?                                                     |
 |:--------------------:|:---------------:|:------------------------------------------------------------------------------------------------------------------:|
